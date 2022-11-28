@@ -1,19 +1,26 @@
 <script>
-import PageTitle from "./components/PageTitle.vue";
+import Appheader from "./components/Appheader.vue";
+import AppMain from "./components/AppMain.vue";
 
 export default {
   components: {
-    PageTitle,
+    Appheader,
+    AppMain,
   },
 };
 </script>
 
 <template>
-  <div>
-    <PageTitle />
+  <div class="background">
+    <Appheader />
+    <AppMain />
   </div>
 </template>
 
-<style scoped>
+<style lang="scss">
 @import "./style/global.scss";
+
+.background {
+  background-color: #2e3a46;
+}
 </style>
