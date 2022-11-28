@@ -20,5 +20,6 @@ header {
 }
 img {
   width: 4.0625rem;
+  margin-right: 0.3125rem;
 }
 </style>
