@@ -1,4 +1,6 @@
 <script>
+import axios from "axios";
+import { store } from "../store";
 import SelectCategory from "./SelectCategory.vue";
 import CharactersSection from "./CharactersSection.vue";
 
@@ -7,11 +9,33 @@ export default {
     SelectCategory,
     CharactersSection,
   },
+  data() {
+    return {
+      store,
+    };
+  },
+  methods: {
+    filterCategory() {
+      axios
+        .get("https://www.breakingbadapi.com/api/characters", {
+          params: {
+            category: this.store.category,
+          },
+        })
+        .then((resp) => {
+          this.store.characters = resp.data;
+          console.log(resp);
+        });
+    },
+  },
+  created() {
+    this.filterCategory();
+  },
 };
 </script>
 
 <template>
-  <SelectCategory />
+  <SelectCategory @search="filterCategory" />
   <CharactersSection />
 </template>
 

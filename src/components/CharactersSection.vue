@@ -1,5 +1,5 @@
 <script>
-import axios from "axios";
+import { store } from "../store";
 import CharacterCard from "./CharacterCard.vue";
 
 export default {
@@ -8,24 +8,25 @@ export default {
   },
   data() {
     return {
-      characters: [],
+      store,
     };
   },
-  created() {
-    axios.get("https://www.breakingbadapi.com/api/characters").then((resp) => {
-      this.characters = resp.data;
-      console.log(resp);
-    });
+  computed: {
+    totalCharacters() {
+      return store.characters.length;
+    },
   },
 };
 </script>
 
 <template>
   <section class="container p-5">
-    <div id="chars-founded" class="p-3">Fount 62 characters</div>
+    <div id="chars-founded" class="p-3">
+      <h3>Found {{ totalCharacters }} characters</h3>
+    </div>
     <div class="row text-center justify-content-evenly">
       <CharacterCard
-        v-for="character in characters"
+        v-for="character in store.characters"
         class="col-sm-6 col-md-3 col-lg-2"
         :info="character"
       />
